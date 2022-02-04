@@ -6,11 +6,13 @@ print(capitals)
 
 # 1. Declare a variable to a shelve file
 # <variable> = shelve.open(<filename string>)
+myfile = shelve.open("uscapitals")
 
 
 # 2. Save the capitals dictionary to the file under the name 'capitals'
 #<filevariable>[<name>] = <value>
-
+myfile["capitals"] = capitals
 
 # 3. Close the file.
 # <variable>.close()
+myfile.close()

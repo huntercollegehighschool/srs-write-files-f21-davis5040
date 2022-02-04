@@ -12,10 +12,14 @@ answerfile = 'answers' + str(quizNum) + '.txt'
 
 # 1. Open 2 files that you will write to, a quiz and an answer key file
 # <var> = open(<string>, 'w')
+a = open("quiz", 'w')
+b = open("ans", 'w')
 
 
 # 2. Write headings on both files
 # <filevariable>.write(<string>)
+a.write('Quiz' + str(quizname) + "\n")
+b.write('Answers to ' + str(quizname))
 
 
 # the following creates a list of states, and then puts them in a random order
@@ -32,37 +36,45 @@ for questionNum in range(50):  # loop through each of the 50 states
   # <list>.remove(<value>)
   # OR
   # del <list>[<index>]
+  wrong.remove(correct)
 
   # 4. A multiple choice quiz generally as a couple of wrong choices along with the correct choice. Create a list of multiple choice options. Start by randomly selecting 3 or 4 (or more, if you wish) wrong choices
   # <variable> = random.sample(<list>, <how many>)
-  
+  choices = random.sample(wrong, 4)
 
   # 5. Add the correct answer to your list of multiple choice options.
   # <list>.append(<value>)
-
-
+  choices.append(correct)
 
   # 6. Make sure you shuffle the options for the multiple choice (otherwise, the correct answer will always be the last choice)
   # random.shuffle(<list>)
-
+  random.shuffle(choices)
 
   # 7. Write the question to the quiz (It should at least include the state itself and possibly the questions number)
   # Reminder: states[questionNum] is the current state
   # <filevariable>.write(<text>)
-
+  
+  a.write(str(questionNum) + ". " + states[questionNum] + "\n")
 
   # 8. Write the answer choices to the quiz. Choices are usually labeled A, B, C, D. It can be done with a loop (which is much easier), but doesn't have to be.
   # <filevariable>.write(<text>)
+  s = "ABCD"
+  for i in range(4):
+    a.write(s[i], ") ", choices[i], "\n")
   
 
   # 9. Write the correct answer to the answer key file. It's up to you how you want to format it, but it probably should include the question number, the correct answer letter, and the correct capital.
   # <list>.index(<value>) may be helpful
   # <filevariable>.write(<text>)
-  
+  alp = "ABCD"
+  answer = choices.index(correct)
+  b.write(questionNum, ")", alp[answer], " ", choices[answer], "\n")
 
 
 # 10. After completely writing both the quiz and the answer key, make sure to close both files.
 # <filevariable>.close()
+a.close()
+b.close()
 
 
 
